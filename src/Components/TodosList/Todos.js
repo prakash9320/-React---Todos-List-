@@ -22,14 +22,12 @@ const Todos = () => {
         };
          
         //  how to delete item Selection
-        const deleteItem =(index) =>{
-          const updateItems = items.filter((currentElement)=>{
-              return(
-                  currentElement.id===index
-              )
-          });
-          setItems(updateItems);
-        }
+        const deleteItem = (index) => {
+            const updatedItems = items.filter((currentElement) => {
+              return currentElement.id !== index;
+            });
+            setItems(updatedItems);
+          };
     return (
         <div>
             <div className ="main-div">
