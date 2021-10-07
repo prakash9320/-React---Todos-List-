@@ -1,10 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
-
+ import TodosList from './Components/TodosList/Todos';
 function App() {
   return (
-    <div className="App">
-     
+    <div >
+        <TodosList/>  
     </div>
   );
 }
