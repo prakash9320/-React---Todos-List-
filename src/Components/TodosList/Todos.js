@@ -10,10 +10,26 @@ const Todos = () => {
           if(!inputData){
               alert("Please Fil The Input")
           }else{
-              setItems([...items,inputData])
+         
+            const myNewNumberData = {
+                id:new Date().getTime().toString(),
+                name: inputData,
+            }              
+
+              setItems([...items,myNewNumberData]);
+              setInputData("");
           }
         };
-       
+         
+        //  how to delete item Selection
+        const deleteItem =(index) =>{
+          const updateItems = items.filter((currentElement)=>{
+              return(
+                  currentElement.id===index
+              )
+          });
+          setItems(updateItems);
+        }
     return (
         <div>
             <div className ="main-div">
@@ -31,13 +47,13 @@ const Todos = () => {
                         </div>
                          {/* show our item */}
                            <div className="showItems">
-                                 {items.map((currentElement,indexNumber)=>{
+                                 {items.map((currentElement)=>{ 
                                      return(
-                                        <div className ="eachItem">
-                                        <h3>{currentElement}</h3>
+                                        <div className ="eachItem" key={currentElement.id }>
+                                        <h3>{currentElement.name}</h3>
                                         <div className ="todo-btn">
                                         <i className="far fa-edit add-btn"></i>
-                                        <i className="fas fa-trash-alt"></i>
+                                        <i className="fas fa-trash-alt" onClick={()=> deleteItem(currentElement.id)}></i>
                                         </div>
                                     </div>
                                      )
