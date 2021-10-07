@@ -10,6 +10,7 @@ const Todos = () => {
                         <figcaption>Add Your List Here</figcaption>
                         <div className ="addItems">
                             <input type="text" placeholder="Add Items.." className="form-control"></input>
+                            <i className="fa fa-plus add-btn"></i>
                         </div>
                     </figure>
                 </div>
