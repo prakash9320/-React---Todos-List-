@@ -1,9 +1,19 @@
- import react,{useState} from 'react';
+ import {useState} from 'react';
 import './Style.css';
 import Logo from '../imges/todo.svg';
 const Todos = () => {
       const [inputData,setInputData] = useState("");
-      const [items,setItems] = useState();
+      const [items,setItems] = useState([]);
+
+        //    add Item Function 
+        const addItem = () =>{
+          if(!inputData){
+              alert("Please Fil The Input")
+          }else{
+              setItems([...items,inputData])
+          }
+        };
+       
     return (
         <div>
             <div className ="main-div">
@@ -17,17 +27,22 @@ const Todos = () => {
                                  value={inputData}
                                  onChange={(event)=>setInputData(event.target.value)}   
                             ></input>
-                            <i className="fa fa-plus add-btn"></i>
+                            <i className="fa fa-plus add-btn" onClick={addItem}></i>
                         </div>
                          {/* show our item */}
                            <div className="showItems">
-                                 <div className ="eachItem">
-                                     <h3>Apple</h3>
-                                     <div className ="todo-btn">
-                                     <i className="far fa-edit add-btn"></i>
-                                     <i class="fas fa-trash-alt"></i>
-                                     </div>
-                                 </div>
+                                 {items.map((currentElement,indexNumber)=>{
+                                     return(
+                                        <div className ="eachItem">
+                                        <h3>{currentElement}</h3>
+                                        <div className ="todo-btn">
+                                        <i className="far fa-edit add-btn"></i>
+                                        <i className="fas fa-trash-alt"></i>
+                                        </div>
+                                    </div>
+                                     )
+                                     
+                                 })}      
                            </div>
                            
                           <div className="showItems">
