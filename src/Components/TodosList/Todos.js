@@ -15,11 +15,25 @@ const Todos = () => {
       const [inputData,setInputData] = useState("");
       const [items,setItems] = useState(getLocalData());
       const [isEditItems,setisEditItems] =useState("")
+      const [ToggleButton,setToggleButton] = useState(false)
         //    add Item Function 
         const addItem = () =>{
           if(!inputData){
               alert("Please Fil The Input")
-          }else{
+          }else if(inputData && ToggleButton){
+              setItems(
+                  items.map((currentElement)=>{
+                    if(currentElement.id === isEditItems){
+                        return {...currentElement, name: inputData}
+                    }
+                    return currentElement; 
+                  })
+              )
+              setInputData([])
+              setisEditItems(null);
+              setToggleButton(false);
+          }
+            else{
          
             const myNewNumberData = {
                 id:new Date().getTime().toString(),
@@ -35,8 +49,9 @@ const Todos = () => {
               const item_dodo_edited = items.find((currentElement)=>{
                   return currentElement.id === index;
               });
-               setInputData(item_dodo_edited)
-              setisEditItems(index)
+               setInputData(item_dodo_edited.name)
+              setisEditItems(index);
+              setToggleButton( true);
          }
          
         //  how to delete item Selection 
@@ -71,7 +86,10 @@ const Todos = () => {
                                  value={inputData}
                                  onChange={(event)=>setInputData(event.target.value)}   
                             ></input>
-                            <i className="fa fa-plus add-btn" onClick={addItem}></i>
+                              {ToggleButton ? (<i className="fa fa-edit add-btn" onClick={addItem}></i>) 
+
+                              :(<i className="fa fa-plus add-btn" onClick={addItem}></i>)}
+                            
                         </div>
                          {/* show our item */}
                            <div className="showItems">
