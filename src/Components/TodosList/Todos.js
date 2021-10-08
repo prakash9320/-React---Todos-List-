@@ -21,13 +21,19 @@ const Todos = () => {
           }
         };
          
-        //  how to delete item Selection
+        //  how to delete item Selection 
         const deleteItem = (index) => {
             const updatedItems = items.filter((currentElement) => {
               return currentElement.id !== index;
             });
             setItems(updatedItems);
           };
+       
+        //    removeAll List Items
+         const removeAll = () =>{
+ setItems([])
+         };
+
     return (
         <div>
             <div className ="main-div">
@@ -60,7 +66,7 @@ const Todos = () => {
                            </div>
                            
                           <div className="showItems">
-                              <button className="btn effect04" data-sm-link-text="Remove All"><span>CHECK LIST</span></button>
+                              <button className="btn effect04" data-sm-link-text="Remove All" onClick={removeAll}><span>CHECK LIST</span></button>
                               </div>
                     </figure>
                 </div>
