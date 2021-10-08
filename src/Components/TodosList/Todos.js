@@ -1,9 +1,19 @@
- import {useState} from 'react';
+ import {useState,useEffect} from 'react';
 import './Style.css';
-import Logo from '../imges/todo.svg';
+import Logo from '../imges/todo.svg'; 
+
+ const getLocalData =() =>{
+       const  list = localStorage.getItem("Mytodolist");
+       if(list){
+           return JSON.parse(list);
+       }else{
+           return [];
+       }
+ };
+
 const Todos = () => {
       const [inputData,setInputData] = useState("");
-      const [items,setItems] = useState([]);
+      const [items,setItems] = useState(getLocalData());
 
         //    add Item Function 
         const addItem = () =>{
@@ -31,8 +41,14 @@ const Todos = () => {
        
         //    removeAll List Items
          const removeAll = () =>{
- setItems([])
+          setItems([])
          };
+
+        //  add Local Storage
+
+        useEffect(()=>{
+            localStorage.setItem("Mytodolist",JSON.stringify(items))
+        },[items]);
 
     return (
         <div>
