@@ -14,7 +14,7 @@ import Logo from '../imges/todo.svg';
 const Todos = () => {
       const [inputData,setInputData] = useState("");
       const [items,setItems] = useState(getLocalData());
-
+      const [isEditItems,setisEditItems] =useState("")
         //    add Item Function 
         const addItem = () =>{
           if(!inputData){
@@ -30,6 +30,14 @@ const Todos = () => {
               setInputData("");
           }
         };
+        //   edit the items function
+         const editItems = (index) =>{
+              const item_dodo_edited = items.find((currentElement)=>{
+                  return currentElement.id === index;
+              });
+               setInputData(item_dodo_edited)
+              setisEditItems(index)
+         }
          
         //  how to delete item Selection 
         const deleteItem = (index) => {
@@ -72,7 +80,7 @@ const Todos = () => {
                                         <div className ="eachItem" key={currentElement.id }>
                                         <h3>{currentElement.name}</h3>
                                         <div className ="todo-btn">
-                                        <i className="far fa-edit add-btn"></i>
+                                        <i className="far fa-edit add-btn" onClick={()=>editItems(currentElement.id)}></i>
                                         <i className="fas fa-trash-alt" onClick={()=> deleteItem(currentElement.id)}></i>
                                         </div>
                                     </div>
